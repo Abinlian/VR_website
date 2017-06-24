@@ -25,7 +25,7 @@ if (zTemp) {
     document.getElementById("zDelete").onclick = showPage("zDelete");
 }
 
-// 鏄剧ず鍝竴涓澘鍧楃殑鍐呭
+// 显示哪一个板块的内容
 function showPage(targetId) {
     return function() {
         selectContent(targetId);
@@ -77,7 +77,7 @@ if (zTemp) {
     document.getElementById("zDeleteIcon").onclick = deleteHot;
 }
 
-// 鍙戝竷澶存潯
+// 发布头条
 function publishHot() {
     var str = "";
     
@@ -97,21 +97,21 @@ function publishHot() {
     }
 
     if (span.length == 0) {
-        alert("璇疯嚦灏戦�涓竴绡囪鍙戝竷鐨勬枃绔狅紒锛侊紒");
+        alert("请至少选中一篇要发布的文章！！！");
     } else {
-        if (confirm("纭畾瑕佸彂甯冧互涓嬶細\n" + str + span.length + "绡囨枃绔狅紵")) {
+        if (confirm("确定要发布以下：\n" + str + span.length + "篇文章？")) {
             for (var i = 0; i < span.length; i++) {
                 check_box[i].checked = false;
                 check_box[i].style.display = "none";
                 span[i].style.display = "block";
             }
 
-            alert("鎴愬姛鍙戝竷浠ヤ笅锛歕n" + str + span.length + "绡囨枃绔狅紒");
+            alert("成功发布以下：\n" + str + span.length + "篇文章！");
         }    
     }
 }
 
-// 鍒犻櫎澶存潯
+// 删除头条
 function deleteHot() {
     var str = "";
     
@@ -131,16 +131,16 @@ function deleteHot() {
     }
 
     if (span.length == 0) {
-        alert("璇疯嚦灏戦�涓竴绡囪鍒犻櫎鐨勬枃绔狅紒锛侊紒");
+        alert("请至少选中一篇要删除的文章！！！");
     } else {
-        if (confirm("纭畾瑕佸垹闄や互涓嬶細\n" + str + span.length + "绡囨枃绔狅紵")) {
+        if (confirm("确定要删除以下：\n" + str + span.length + "篇文章？")) {
             for (var i = 0; i < span.length; i++) {
                 check_box[i].checked = false;
                 check_box[i].style.display = "none";
                 span[i].style.display = "block";
             }
 
-            alert("鎴愬姛鍒犻櫎浠ヤ笅锛歕n" + str + span.length + "绡囨枃绔狅紒");
+            alert("成功删除以下：\n" + str + span.length + "篇文章！");
         }    
     }
 }
@@ -242,7 +242,7 @@ function selectPos(target_id) {
         turn = document.getElementById(z_select_con_id[turn_pos]);
         turn.style.display = "block";
         nowStr = turn.getElementsByTagName("h2")[0].innerText;
-        nowStr = nowStr.replace("", "");
+        nowStr = nowStr.replace("：", "");
 
         document.getElementById("zNextIcon").style.display = "block";
 
@@ -285,9 +285,9 @@ function zUpdateHot() {
     }
 
     if (!found) {
-        alert("璇烽�鎷╀竴绡囨枃绔犳浛鎹㈠綋鍓嶉�涓殑澶存潯");
+        alert("请选择一篇文章替换当前选中的头条");
     } else {
-        if (confirm("纭畾鎶婇�涓殑澶存潯鏇挎崲" + nowStr + "")) {
+        if (confirm("确定把选中的头条替换" + nowStr + "？")) {
             var title = target.getElementsByTagName("a")[0].innerText;
             var date = target.getElementsByTagName("span")[0].innerText;
             var detail = target.getElementsByTagName("p")[0].innerText;
@@ -298,7 +298,7 @@ function zUpdateHot() {
             temp[0].innerText = date;
             temp[1].innerText = detail;
 
-            alert("鏇存柊鎴愬姛");
+            alert("更新成功");
             zBackSelect();
         }
     }
