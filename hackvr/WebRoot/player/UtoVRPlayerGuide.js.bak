@@ -1,0 +1,283 @@
+"object" != typeof JSON && (JSON = {}), function() {
+	function m(a) {
+		return 10 > a ? "0" + a : a
+	}
+	function r() {
+		return this.valueOf()
+	}
+	function t(a) {
+		return u.lastIndex = 0, u.test(a) ? '"' + a.replace(u, function(a) {
+			var b = w[a];
+			return "string" == typeof b ? b : "\\u" + ("0000" + a.charCodeAt(0).toString(16)).slice(-4)
+		}) + '"' : '"' + a + '"'
+	}
+	function p(a, b) {
+		var c, d, f, g, i, h = e,
+			j = b[a];
+		switch (j && "object" == typeof j && "function" == typeof j.toJSON && (j = j.toJSON(a)), "function" == typeof k && (j = k.call(b, a, j)), typeof j) {
+		case "string":
+			return t(j);
+		case "number":
+			return isFinite(j) ? String(j) : "null";
+		case "boolean":
+		case "null":
+			return String(j);
+		case "object":
+			if (!j) return "null";
+			if (e += n, i = [], "[object Array]" === Object.prototype.toString.apply(j)) {
+				for (g = j.length, c = 0; g > c; c += 1) i[c] = p(c, j) || "null";
+				return f = 0 === i.length ? "[]" : e ? "[\n" + e + i.join(",\n" + e) + "\n" + h + "]" : "[" + i.join(",") + "]", e = h, f
+			}
+			if (k && "object" == typeof k) for (g = k.length, c = 0; g > c; c += 1)"string" == typeof k[c] && (d = k[c], (f = p(d, j)) && i.push(t(d) + (e ? ": " : ":") + f));
+			else for (d in j) Object.prototype.hasOwnProperty.call(j, d) && (f = p(d, j)) && i.push(t(d) + (e ? ": " : ":") + f);
+			return f = 0 === i.length ? "{}" : e ? "{\n" + e + i.join(",\n" + e) + "\n" + h + "}" : "{" + i.join(",") + "}", e = h, f
+		}
+	}
+	var e, n, w, k, x = /^[\],:{}\s]*$/,
+		y = /\\(?:["\\\/bfnrt]|u[0-9a-fA-F]{4})/g,
+		z = /"[^"\\\n\r]*"|true|false|null|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?/g,
+		A = /(?:^|:|,)(?:\s*\[)+/g,
+		u = /[\\\"--­؀-؄܏឴឵‌-‏ - ⁠-⁯﻿￰-￿]/g,
+		v = /[­؀-؄܏឴឵‌-‏ - ⁠-⁯﻿￰-￿]/g;
+	"function" != typeof Date.prototype.toJSON && (Date.prototype.toJSON = function() {
+		return isFinite(this.valueOf()) ? this.getUTCFullYear() + "-" + m(this.getUTCMonth() + 1) + "-" + m(this.getUTCDate()) + "T" + m(this.getUTCHours()) + ":" + m(this.getUTCMinutes()) + ":" + m(this.getUTCSeconds()) + "Z" : null
+	}, Boolean.prototype.toJSON = r, Number.prototype.toJSON = r, String.prototype.toJSON = r), "function" != typeof JSON.stringify && (w = {
+		"\b": "\\b",
+		" ": "\\t",
+		"\n": "\\n",
+		"\f": "\\f",
+		"\r": "\\r",
+		'"': '\\"',
+		"\\": "\\\\"
+	}, JSON.stringify = function(a, b, c) {
+		var d;
+		if (n = e = "", "number" == typeof c) for (d = 0; c > d; d += 1) n += " ";
+		else "string" == typeof c && (n = c);
+		if ((k = b) && "function" != typeof b && ("object" != typeof b || "number" != typeof b.length)) throw Error("JSON.stringify");
+		return p("", {
+			"": a
+		})
+	}), "function" != typeof JSON.parse && (JSON.parse = function(a, e) {
+		function c(a, b) {
+			var d, f, g = a[b];
+			if (g && "object" == typeof g) for (d in g) Object.prototype.hasOwnProperty.call(g, d) && (f = c(g, d), void 0 !== f ? g[d] = f : delete g[d]);
+			return e.call(a, b, g)
+		}
+		var d;
+		if (a = String(a), v.lastIndex = 0, v.test(a) && (a = a.replace(v, function(a) {
+			return "\\u" + ("0000" + a.charCodeAt(0).toString(16)).slice(-4)
+		})), x.test(a.replace(y, "@").replace(z, "]").replace(A, ""))) return d = eval("(" + a + ")"), "function" == typeof e ? c({
+			"": d
+		}, "") : d;
+		throw new SyntaxError("JSON.parse")
+	})
+}(), function() {
+	var z, A, B, b = function() {
+			var b, d, f, e, h, g;
+			try {
+				a.b.c()
+			} catch (c) {
+				b = c.stack, !b && window.opera && (b = (String(c).match(/of linked script \S+/g) || []).join(" "))
+			}
+			if (b && (b = b.split(/[@ ]/g).pop(), b = "(" === b[0] ? b.slice(1, -1) : b.replace(/\s/, ""), b = b.replace(/(:\d+)?:\d+$/i, "")), !b) for (d = document.getElementsByTagName("script"), e = /UtoVRPlayerGuide.js/i, g = 0; h = d[g++];) if (f = document.querySelector ? h.src : h.getAttribute("src", 4), f && e.test(f)) {
+				b = f;
+				break
+			}
+			return b.substr(0, b.lastIndexOf("/"))
+		},
+		c = function(a) {
+			var b = /\.[^\.]+$/.exec(a);
+			return b ? b[0] : null
+		},
+		d = function(a) {
+			var b = new RegExp("(^|&)" + a + "=([^&]*)(&|$)", "i"),
+				c = window.location.search.substr(1).match(b);
+			return null != c ? c[2] : null
+		},
+		e = b(),
+		f = e + "/UtoVRPlayer.js",
+		g = e + "/UtoVRPlayer.swf",
+		h = e + "/plugin/videoToolBar/style/videobar.css",
+		i = e + "/plugin/videoToolBar/js/video_toolbar.js",
+		j = e + "/plugin/gyro/gyro.js",
+		k = e + "/plugin/hls/hls.js",
+		l = e + "/plugin/3DVideo/3DVideo.js",
+		m = e + "/panoBG/image3D.jpg",
+		n = [-35, 25, 35, 25, 35, -10, -35, -10],
+		o = 100,
+		p = 0,
+		q = function(a) {
+			return document.createElement(a)
+		},
+		r = function() {
+			var d, f, g, h, a = !1,
+				b = [],
+				c = {
+					flash: {
+						activex: "ShockwaveFlash.ShockwaveFlash",
+						plugin: /flash/gim
+					}
+				};
+			if (window.ActiveXObject) try {
+				d = new ActiveXObject(c.flash.activex), a = !0, b = d.GetVariable("$version").split(" ")[1].split(",")
+			} catch (e) {
+				a = !1
+			} else for (f = 0; f < navigator.plugins.length; f++) if (g = navigator.plugins[f], g.name.match(c.flash.plugin)) {
+				a = !0, b = g.description.replace(/([a-zA-Z]|\s)+/, "").replace(/(\s+r|\s+b[0-9]+)/, ".").split(".");
+				break
+			}
+			return h = {
+				support: a,
+				maxVersion: 1 * b[0],
+				minVersion: 1 * b[1],
+				allVersion: b.toString()
+			}, h.support && h.maxVersion >= 11 ? !0 : !1
+		},
+		s = function() {
+			var a, b, c, d;
+			if (window.WebGLRenderingContext) {
+				a = document.createElement("canvas"), b = ["webgl", "experimental-webgl", "moz-webgl", "webkit-3d"], c = !1;
+				for (d in b) try {
+					if (c = a.getContext(b[d]), c && "function" == typeof c.getParameter) return !0
+				} catch (e) {}
+				return !1
+			}
+			return !1
+		},
+		t = function(a, b) {
+			var e, f, c = a.length,
+				d = 0;
+			for (e = 0; c > e; e++) f = document.createElement("script"), f.type = "text/javascript", f.src = a[e] + "?20160509", f.charset = "utf-8", f.onload = function() {
+				this.readyState && "loaded" != this.readyState && "complete" != this.readyState || (++d, d === c && b && b())
+			}, f.onerror = function() {
+				++d, d === c && b && b()
+			}, document.getElementsByTagName("head")[0].appendChild(f)
+		},
+		u = function(a, b) {
+			var e, f, c = a.length,
+				d = 0;
+			for (e = 0; c > e; e++) f = document.createElement("link"), f.type = "text/css", f.rel = "stylesheet", f.charset = "utf-8", f.href = a[e] + "?20160509", f.onload = function() {
+				this.readyState && "loaded" != this.readyState && "complete" != this.readyState || (++d, d === c && b && b())
+			}, document.getElementsByTagName("head")[0].appendChild(f)
+		},
+		v = r(),
+		w = s(),
+		x = function() {
+			var a = "";
+			try {
+				//a = window.top == window ? "" : window.top.location.href
+			} catch (b) {
+				a = ""
+			}
+			return a
+		},
+		y = function(a) {
+			var c, e, f, i, j, k, l, r, s, t, u, b = a["container"];
+			delete a["container"], c = a["scenesArr"], delete a["scenesArr"], e = [{
+				bgId: "bgpano1",
+				bgName: "剧场环境",
+				path: c[0]["sceneBGPath"] || m
+			}], f = "", c[0]["sceneFilePath"], i = (c[0]["initPan"] || p) + 180, j = c[0]["initFov"] || o, c[0]["initPan"] = i, c[0]["initFov"] = j, c[0]["videoPT"] = n, c[0]["bgPano"] = e, a["base"] = location.href, k = x(), k && (a["topBase"] = k), a["scenesArr"] = c, f = JSON.stringify(a), f = f.replace(/\"/g, "'"), f = encodeURIComponent(f), f = "params=" + f, l = q("embed"), r = d("wmode") || "opaque", s = {
+				type: "application/x-shockwave-flash",
+				src: g,
+				width: "100%",
+				height: "100%",
+				id: "sotester",
+				name: "sotester",
+				bgcolor: "#FFFFFF",
+				quality: "high",
+				allownetworking: "all",
+				allowscriptaccess: "always",
+				allowfullscreen: "true",
+				scale: "noscale",
+				wmode: r
+			};
+			for (t in s) l.setAttribute(t, s[t]);
+			u = {
+				position: "absolute",
+				width: "100%",
+				height: "100%",
+				left: "0px",
+				top: "0px"
+			};
+			for (t in u) l.style[t] = u[t];
+			l.setAttribute("flashvars", f), b = b ? b : document.body, b.appendChild(l)
+		},
+		C = function() {
+			return window.MediaSource && window.MediaSource.isTypeSupported('video/mp4; codecs="avc1.42E01E,mp4a.40.2"')
+		},
+		D = function(a, b) {
+			var d, e, g;
+			u([h]), d = a["scenesArr"], delete a["scenesArr"], e = [f, i], "ontouchstart" in window && e.push(j), "2DVideo" == d[0]["sceneMode"] && e.push(l), g = a["fsCallBack"], b && b.videoList && (d[0].sceneFilePath = b.videoList[b.videoIndex].path), C() && ".m3u8" === c(d[0]["sceneFilePath"]) && e.push(k), t(e, function() {
+				var c, e, f, h;
+				a["fullScreenMode"] === !0 && (c = JTUtil.getWindowSize().viewPort, a["width"] = c.width, a["height"] = c.height), "2DVideo" == d[0]["sceneMode"] ? (a["isRightClick"] = !1, e = {
+					sceneId: "2DVideoID",
+					sceneFilePath: d[0]["sceneBGPath"] || m,
+					sceneType: "Sphere",
+					initPan: d[0]["initPan"] || p,
+					initFov: d[0]["initFov"] || o
+				}, a["loadedCallBack"] = function() {
+					B = new video3DClass(this, n, d[0]["sceneFilePath"])
+				}, a["drawWebGLCallBack"] = function() {
+					B.loopVideo()
+				}, a["scenesArr"] = [e]) : a["scenesArr"] = d, f = {
+					container: a["container"] || document.body,
+					name: a["name"] || "UToVRDesk",
+					dragDirectionMode: a["dragDirectionMode"],
+					dragMode: a["dragMode"] || !1,
+					width: a["width"] || 800,
+					height: a["height"] || 500,
+					isAutoRotate: a["isAutoRotate"] || !1,
+					isMouseWheel: a["isMouseWheel"],
+					isDBClick: a["isDBClick"],
+					isDBViewPort: a["isDBViewPort"] || !1,
+					DBViewIPD: a["DBViewIPD"],
+					isGyro: a["isGyro"] || !1,
+					isDragAble: a["isDragAble"],
+					isMoveVideoFrame: a["isMoveVideoFrame"],
+					scenesArr: a["scenesArr"],
+					initOverCallBack: function() {
+						var c = this.api_getCurSceneType();
+						"Video" === c && (A = new TWToolbarClass({
+							container: this.target
+						}, this, g, b), A && A.setDefault()), "function" == typeof a.initOverCallBack && a.initOverCallBack.apply(this, arguments)
+					},
+					sceneResizeCallBack: function() {
+						A && A.resize(), "function" == typeof a.sceneResizeCallBack && a.sceneResizeCallBack.apply(this, arguments)
+					},
+					fullScreenChangeCallBack: function() {
+						A && A.setFullScreenStatus(), "function" == typeof a.fullScreenChangeCallBack && a.fullScreenChangeCallBack.apply(this, arguments)
+					},
+					videoLoadProgressCallBack: function() {
+						A && A.getUpdateBuffered(), "function" == typeof a.videoLoadProgressCallBack && a.videoLoadProgressCallBack.apply(this, arguments)
+					},
+					videoPlayerCallBack: function() {
+						A && A.setPlayStatus(), "function" == typeof a.videoPlayerCallBack && a.videoPlayerCallBack.apply(this, arguments)
+					},
+					videoUpdateCallBack: function() {
+						A && A.updateProperties(), "function" == typeof a.videoUpdateCallBack && a.videoUpdateCallBack.apply(this, arguments)
+					},
+					videoLoadMetaDataCallBack: function() {
+						A && A.updateProperties(), "function" == typeof a.videoLoadMetaDataCallBack && a.videoLoadMetaDataCallBack.apply(this, arguments)
+					}
+				}, "function" == typeof a.videoCanPlayerCallBack && (f.videoCanPlayerCallBack = a.videoCanPlayerCallBack), "function" == typeof a.loadedCallBack && (f.loadedCallBack = a.loadedCallBack), "function" == typeof a.drawWebGLCallBack && (f.drawWebGLCallBack = a.drawWebGLCallBack), "function" == typeof a.errorCallBack && (f.errorCallBack = a.errorCallBack), "function" == typeof a.scenePanTiltFovChangerCallBack && (f.scenePanTiltFovChangerCallBack = a.scenePanTiltFovChangerCallBack), "function" == typeof a.sceneEventMoveCallBack && (f.sceneEventMoveCallBack = a.sceneEventMoveCallBack), "function" == typeof a.sceneEventUpCallBack && (f.sceneEventUpCallBack = a.sceneEventUpCallBack), "function" == typeof a.sceneEventClickCallBack && (f.sceneEventClickCallBack = a.sceneEventClickCallBack), "function" == typeof a.sceneEventDownCallBack && (f.sceneEventDownCallBack = a.sceneEventDownCallBack), "function" == typeof a.videoLoadStartCallBack && (f.videoLoadStartCallBack = a.videoLoadStartCallBack), "function" == typeof a.videoTogglePlayCallBack && (f.videoTogglePlayCallBack = a.videoTogglePlayCallBack), "function" == typeof a.videoPlayEndCallBack && (f.videoPlayEndCallBack = a.videoPlayEndCallBack), "function" == typeof a.setVideoCurTimeCallBack && (f.setVideoCurTimeCallBack = a.setVideoCurTimeCallBack), "function" == typeof a.changeSucessCallBack && (f.changeSucessCallBack = a.changeSucessCallBack), "function" == typeof a.changeErrorCallBack && (f.changeErrorCallBack = a.changeErrorCallBack), z = new JTPlay(f), a["fullScreenMode"] === !0 && (h = function() {
+					var a = JTUtil.getWindowSize().viewPort,
+						b = a.width,
+						c = a.height;
+					z.api_resize(b, c)
+				}, EventUtil.addEvent(window, "resize", h))
+			})
+		},
+		E = function(a, b) {
+			var c = "html5";
+			return w ? D(a, b) : v ? (y(a), c = "flash") : D(a, b), c
+		},
+		F = function() {
+			var a = window.location.search;
+			return a.indexOf("playMode=html5") > 0 ? "html5" : a.indexOf("playMode=flash") > 0 ? "flash" : "auto"
+		};
+	window.initLoad = function(a, b, d) {
+		var e, f;
+		a && (e = F(), f = navigator.userAgent.toLowerCase(), a["isLive"] === !0 && (e = "flash"), 0 == a.scenesArr[0]["sceneFilePath"].indexOf("rtmp://") && (e = "flash"), "file:" == window.location.protocol && (e = "flash"), f.match(/edge|msie|trident/) && (e = "flash"), f.match(/macintosh/) && !f.match(/firefox|chrome|opera/) && (e = "flash"), !! f.match(/chrome\/(\d+\.\d)/) && 1 * f.match(/chrome\/(\d+\.\d)/)[1] < 30 && (e = "flash"), ".m3u8" == c(a.scenesArr[0]["sceneFilePath"]) && (e = "html5"), "html5" === e && w ? D(a, d) : "flash" === e && v ? y(a) : e = E(a, d), "function" == typeof b && b(e))
+	}
+}();
